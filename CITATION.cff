@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "tb-data — données expérimentales du Travail de Bachelor (upscaling vidéo IA côté client)"
+message: "Si vous réutilisez ces données, merci de citer le Travail de Bachelor."
+type: dataset
+authors:
+  - family-names: "Queirós da Silva"
+    given-names: "Adriano José"
+repository-code: "https://github.com/DaSilva-Adriano/tb-data"
+license: CC-BY-4.0
+date-released: "2026-09-18"
+keywords:
+  - video super-resolution
+  - client-side AI
+  - energy consumption
+  - VMAF
+  - RTX Video Super Resolution
+  - FSRCNNX
