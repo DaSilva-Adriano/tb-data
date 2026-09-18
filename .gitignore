@@ -1,0 +1,4 @@
+# Cache local de metric-atelier (base SQLite de travail)
+01-QUAL/04-metric-atelier/data/atelier.sqlite
+.DS_Store
+Thumbs.db
