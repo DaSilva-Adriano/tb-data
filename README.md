@@ -20,11 +20,11 @@ Citation : Queirós da Silva, A. J. (2026). Travail de Bachelor, HEG-GE. Voir au
 
 ```
 01-QUAL/                          qualité des reconstructions
-  01-LOS/                         scores full-reference, corpus lossless
-    01-VMAFV1/                    contrôle VMAF v1 (même clips lossless)
-  02-LAD/                         ladder CRF / « LAD »
-  03-ADP/                         ladder adaptatif (Sunflower, Karting)
-  04-metric-atelier/              exports de l’outil metric-atelier
+  01-LOS/                         vsr-eval — corpus lossless
+    01-VMAFV1/                    vsr-eval — contrôle VMAF v1
+  02-LAD/                         vsr-eval — ladder CRF / « LAD »
+  03-ADP/                         vsr-eval — ladder adaptatif
+  04-metric-atelier/              metric-atelier — import et comparaison
   05-subjectify/                  test par paires Native 4K vs VSR
     01-Brute/ai-upscaling.csv     export brut Subjectify.us
     Subjectify-VSR-vs-Native4K.xlsx
@@ -40,6 +40,17 @@ Citation : Queirós da Silva, A. J. (2026). Travail de Bachelor, HEG-GE. Voir au
     4080s/Consommation-VSR-CHROME-4080.xlsx
     4080s/numbers-logger/         CSV sessions tour
 ```
+
+### Origine des fichiers `01-QUAL`
+
+| Dossier | Outil | Rôle |
+| --- | --- | --- |
+| `01-LOS/`, `02-LAD/`, `03-ADP/` | [vsr-eval](https://github.com/DaSilva-Adriano/vsr-eval) | Exports full-reference (PSNR, SSIM, MS-SSIM, VMAF, LPIPS, ERQA), y compris les tableaux / CSV de qualité repris dans le mémoire |
+| `01-LOS/01-VMAFV1/` | [vsr-eval](https://github.com/DaSilva-Adriano/vsr-eval) | Même protocole, modèle VMAF v1 |
+| `04-metric-atelier/` | [metric-atelier](https://github.com/DaSilva-Adriano/metric-atelier) | Espace de travail de l’outil : imports des CSV vsr-eval, regroupements, `compare.json` |
+| `05-subjectify/` | Subjectify.us | Jugements par paires (pas vsr-eval) |
+
+Les CSV d’import sous `04-metric-atelier/data/imports/` sont des copies de travail de metric-atelier. Pour citer un score, prendre d’abord les fichiers vsr-eval de `01-LOS`, `02-LAD` et `03-ADP`.
 
 ### Comment lire les CSV `numbers-logger`
 
@@ -59,12 +70,11 @@ Sur la tour, les fichiers `numbers-YYYY-MM-DD_HH-MM-SS.csv` sont des sessions ho
 
 ### Comment lire `01-QUAL`
 
-- `01-LOS` : reconstructions depuis un échelon lossless, comparées à la référence 4K.
-- `02-LAD` : même comparaison après quantification CRF.
-- `03-ADP` : ladder adaptatif (bitrate type plateforme).
+- `01-LOS` (vsr-eval) : reconstructions depuis un échelon lossless, comparées à la référence 4K.
+- `02-LAD` (vsr-eval) : même comparaison après quantification CRF.
+- `03-ADP` (vsr-eval) : ladder adaptatif (bitrate type plateforme).
+- `04-metric-atelier` (metric-atelier) : vue croisée des CSV vsr-eval, pas une deuxième mesure.
 - `05-subjectify` : 78 sessions validées, paires Native4K contre VSR depuis 360p / 480p / 720p / 1080p.
-
-Les CSV d’import sous `04-metric-atelier/data/imports/` sont des copies de travail de l’outil ; les fichiers de `01-LOS`, `02-LAD` et `03-ADP` font foi.
 
 ---
 
@@ -82,8 +92,8 @@ Outils utilisés pour produire ces fichiers :
 | [fsrcnnx-player](https://github.com/DaSilva-Adriano/fsrcnnx-player) | Lecture temps réel FSRCNNX-8 / FSRCNNX-16 (mpv) |
 | [numbers-logger](https://github.com/DaSilva-Adriano/numbers-logger) | OCR d’un wattmètre / overlay et journal CSV |
 | [sr-video-lab](https://github.com/DaSilva-Adriano/sr-video-lab) | Inspection visuelle locale des reconstructions |
-| [vsr-eval](https://github.com/DaSilva-Adriano/vsr-eval) | Métriques full-reference (PSNR, SSIM, MS-SSIM, VMAF, LPIPS, ERQA) |
-| [metric-atelier](https://github.com/DaSilva-Adriano/metric-atelier) | Import, regroupement et comparaison des CSV de métriques |
+| [vsr-eval](https://github.com/DaSilva-Adriano/vsr-eval) | Métriques full-reference — source de `01-LOS`, `02-LAD`, `03-ADP` |
+| [metric-atelier](https://github.com/DaSilva-Adriano/metric-atelier) | Import et comparaison des CSV vsr-eval — source de `04-metric-atelier/` |
 
 Profil : [github.com/DaSilva-Adriano](https://github.com/DaSilva-Adriano)
 
